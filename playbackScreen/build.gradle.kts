@@ -21,6 +21,7 @@ dependencies {
   implementation(projects.data)
   implementation(projects.datastore)
   implementation(projects.sleepTimer)
+  implementation(projects.coverDaemon)
 
   implementation(libs.datastore)
   implementation(libs.coil)

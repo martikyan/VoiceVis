@@ -171,6 +171,7 @@ dependencies {
   implementation(projects.documentfile)
   implementation(projects.onboarding)
   implementation(projects.bookmark)
+  implementation(projects.coverDaemon)
 
   implementation(libs.appCompat)
   implementation(libs.material)

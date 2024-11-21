@@ -17,6 +17,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import voice.common.BookId
 import voice.common.DispatcherProvider
@@ -30,6 +31,7 @@ import voice.data.markForPosition
 import voice.data.repo.BookRepository
 import voice.data.repo.BookmarkRepo
 import voice.logging.core.Logger
+import voice.coverDaemon.CoverUpdater
 import voice.playback.PlayerController
 import voice.playback.misc.Decibel
 import voice.playback.misc.VolumeGain
@@ -54,6 +56,7 @@ class BookPlayViewModel
   private val bookmarkRepository: BookmarkRepo,
   private val volumeGainFormatter: VolumeGainFormatter,
   private val batteryOptimization: BatteryOptimization,
+  private val coverUpdater: CoverUpdater,
   dispatcherProvider: DispatcherProvider,
   @Named(PrefKeys.SLEEP_TIME)
   private val sleepTimePref: Pref<Int>,
@@ -176,6 +179,13 @@ class BookPlayViewModel
   fun playPause() {
     if (playStateManager.playState != PlayStateManager.PlayState.Playing) {
       scope.launch {
+        val bookId = currentBookId.data.first()
+        if (bookId != null) {
+          coverUpdater.updateCover(bookId)
+        } else {
+          Logger.w("currentBookId is null, cannot update cover.")
+        }
+
         if (batteryOptimization.shouldRequest()) {
           _viewEffects.tryEmit(BookPlayViewEffect.RequestIgnoreBatteryOptimization)
           batteryOptimization.onBatteryOptimizationsRequested()

@@ -64,6 +64,7 @@ class BookPlayViewModelTest {
     sleepTimePref = sleepTimerPref,
     bookId = book.id,
     dispatcherProvider = DispatcherProvider(scope.coroutineContext, scope.coroutineContext),
+    coverUpdater = mockk(),
   )
 
   @Test

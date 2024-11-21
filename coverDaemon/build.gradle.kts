@@ -13,6 +13,7 @@ dependencies {
   implementation(projects.strings)
   implementation(projects.playback)
   implementation(projects.data)
+  implementation(projects.scanner)
 
   implementation(libs.androidxCore)
   implementation(libs.prefs.core)
