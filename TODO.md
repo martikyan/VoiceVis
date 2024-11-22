@@ -7,3 +7,6 @@
 - Implement configurable values for cover update interval
 - Implement audiobook slicing
 - Implement loading animation
+- Implement Play Store subscription
+- Update Readme
+- Manage CI/CD
