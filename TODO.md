@@ -10,3 +10,4 @@
 - Implement Play Store subscription
 - Update Readme
 - Manage CI/CD
+- Create a logo, and update resource files
